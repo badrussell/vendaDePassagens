@@ -1,19 +1,23 @@
 
 package br.univates.entity;
 
-import br.univates.util.Rota;
 import java.util.Calendar;
 
+/**
+ * 
+ * @author Filipe, Carlos, Vitor e Matheus
+ */
 public class Voo {
     public static final String TABLE    = "voo";
-    public static final String PRIMARYKEY = "voo.id";
+    public static final String PRIMARYKEY = "id";
     
     private Integer id;
-    private Calendar horaPartida;
-    private Calendar horaChegada;
-    private Calendar dataVoo;
-    private Rota rota;
-    private Aviao aviao;
+    private Calendar horario_artida;
+    private Calendar horario_chegada;
+    private Calendar data_voo;
+    private Integer partida;
+    private Integer chegada;
+    private Integer avioes_id;
     private double valor;
 
     public Integer getId() {
@@ -24,44 +28,52 @@ public class Voo {
         this.id = id;
     }
 
-    public Calendar getHoraPartida() {
-        return horaPartida;
+    public Calendar getHorario_artida() {
+        return horario_artida;
     }
 
-    public void setHoraPartida(Calendar horaPartida) {
-        this.horaPartida = horaPartida;
+    public void setHorario_artida(Calendar horario_artida) {
+        this.horario_artida = horario_artida;
     }
 
-    public Calendar getHoraChegada() {
-        return horaChegada;
+    public Calendar getHorario_chegada() {
+        return horario_chegada;
     }
 
-    public void setHoraChegada(Calendar horaChegada) {
-        this.horaChegada = horaChegada;
+    public void setHorario_chegada(Calendar horario_chegada) {
+        this.horario_chegada = horario_chegada;
     }
 
-    public Rota getRota() {
-        return rota;
+    public Calendar getData_voo() {
+        return data_voo;
     }
 
-    public void setRota(Rota rota) {
-        this.rota = rota;
+    public void setData_voo(Calendar data_voo) {
+        this.data_voo = data_voo;
     }
 
-    public Aviao getAviao() {
-        return aviao;
+    public Integer getPartida() {
+        return partida;
     }
 
-    public void setAviao(Aviao aviao) {
-        this.aviao = aviao;
+    public void setPartida(Integer partida) {
+        this.partida = partida;
     }
 
-    public Calendar getDataVoo() {
-        return dataVoo;
+    public Integer getChegada() {
+        return chegada;
     }
 
-    public void setDataVoo(Calendar dataVoo) {
-        this.dataVoo = dataVoo;
+    public void setChegada(Integer chegada) {
+        this.chegada = chegada;
+    }
+
+    public Integer getAvioes_id() {
+        return avioes_id;
+    }
+
+    public void setAvioes_id(Integer avioes_id) {
+        this.avioes_id = avioes_id;
     }
 
     public double getValor() {
@@ -71,6 +83,5 @@ public class Voo {
     public void setValor(double valor) {
         this.valor = valor;
     }
-    
-    
+     
 }

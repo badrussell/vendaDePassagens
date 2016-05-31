@@ -1,39 +1,43 @@
 
 package br.univates.entity;
 
+/**
+ * 
+ * @author Filipe, Carlos, Vitor e Matheus
+ */
 public class Aviao {
     public static final String TABLE    = "avioes";
-    public static final String PRIMARYKEY = "avioes.id";
+    public static final String PRIMARYKEY = "id";
     
     private Integer id;
-    private double valor;
-    private String modelo;
+    private double valor_aviao;
+    private String nome;
     private String descricao;
-    private CompaniaAerea empresa;
-    private Integer numeroAssentos;
+    private Integer companhias_aereas_id;
+    private Integer numero_assentos;
 
-//    public Integer getId() {
-//        return id;
-//    }
-//
-//    public void setId(Integer id) {
-//        this.id = id;
-//    }
-
-    public double getValor() {
-        return valor;
+    public Integer getId() {
+        return id;
     }
 
-    public void setValor(double valor) {
-        this.valor = valor;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getModelo() {
-        return modelo;
+    public double getValor_aviao() {
+        return valor_aviao;
     }
 
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
+    public void setValor_aviao(double valor_aviao) {
+        this.valor_aviao = valor_aviao;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getDescricao() {
@@ -44,19 +48,20 @@ public class Aviao {
         this.descricao = descricao;
     }
 
-    public CompaniaAerea getEmpresa() {
-        return empresa;
+    public Integer getCompanhias_aereas_id() {
+        return companhias_aereas_id;
     }
 
-    public void setEmpresa(CompaniaAerea empresa) {
-        this.empresa = empresa;
+    public void setCompanhias_aereas_id(Integer companhias_aereas_id) {
+        this.companhias_aereas_id = companhias_aereas_id;
     }
 
-    public Integer getNumeroAssentos() {
-        return numeroAssentos;
+    public Integer getNumero_assentos() {
+        return numero_assentos;
     }
 
-    public void setNumeroAssentos(Integer numeroAssentos) {
-        this.numeroAssentos = numeroAssentos;
+    public void setNumero_assentos(Integer numero_assentos) {
+        this.numero_assentos = numero_assentos;
     }
+
 }

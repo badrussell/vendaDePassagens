@@ -1,9 +1,13 @@
 
 package br.univates.entity;
 
+/**
+ * 
+ * @author Filipe, Carlos, Vitor e Matheus
+ */
 public class Cliente {
     public static final String TABLE    = "cliente";
-    public static final String PRIMARYKEY = "cliente.id";
+    public static final String PRIMARYKEY = "id";
     
     private Integer id;
     private String nome;
@@ -12,13 +16,13 @@ public class Cliente {
     private String usuario;
     private String senha;
 
-//    public Integer getId() {
-//        return id;
-//    }
-//
-//    public void setId(Integer id) {
-//        this.id = id;
-//    }
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
