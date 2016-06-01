@@ -1,16 +1,16 @@
-
 package br.univates.entity;
 
 import java.util.Calendar;
 
 /**
- * 
+ *
  * @author Filipe, Carlos, Vitor e Matheus
  */
 public class Voo {
-    public static final String TABLE    = "voo";
+
+    public static final String TABLE = "voo";
     public static final String PRIMARYKEY = "id";
-    
+
     private Integer id;
     private Calendar horario_artida;
     private Calendar horario_chegada;
@@ -83,5 +83,5 @@ public class Voo {
     public void setValor(double valor) {
         this.valor = valor;
     }
-     
+
 }

@@ -1,16 +1,16 @@
-
 package br.univates.entity;
 
 import java.util.Calendar;
 
 /**
- * 
+ *
  * @author Filipe, Carlos, Vitor e Matheus
  */
 public class Passagem {
-    public static final String TABLE    = "passagens";
+
+    public static final String TABLE = "passagens";
     public static final String PRIMARYKEY = "id";
-    
+
     private Integer id;
     private double valor;
     private Integer voo_id;
@@ -56,5 +56,5 @@ public class Passagem {
     public void setValidade(Calendar validade) {
         this.validade = validade;
     }
-    
+
 }

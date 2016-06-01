@@ -1,10 +1,10 @@
-
 package br.univates.entity;
 
 public class Categoria {
-    public static final String TABLE    = "categorias";
+
+    public static final String TABLE = "categorias";
     public static final String PRIMARYKEY = "id";
-    
+
     private Integer id;
     private String descricao;
     private double taxa;
@@ -32,6 +32,5 @@ public class Categoria {
     public void setTaxa(double taxa) {
         this.taxa = taxa;
     }
-    
-    
+
 }

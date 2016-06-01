@@ -1,17 +1,17 @@
-
 package br.univates.entity;
 
 /**
- * 
+ *
  * @author Filipe, Carlos, Vitor e Matheus
  */
 public class Aeroporto {
-   public static final String TABLE    = "aeroportos";
-   public static final String PRIMARYKEY = "id";
-   
-   private Integer id;
-   private String nome;
-   private String sigla;
+
+    public static final String TABLE = "aeroportos";
+    public static final String PRIMARYKEY = "id";
+
+    private Integer id;
+    private String nome;
+    private String sigla;
 
     public Integer getId() {
         return id;
@@ -36,6 +36,6 @@ public class Aeroporto {
     public void setSigla(String sigla) {
         this.sigla = sigla;
     }
-   
-   
+
+    
 }

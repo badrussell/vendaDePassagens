@@ -1,14 +1,14 @@
-
 package br.univates.entity;
 
 /**
- * 
+ *
  * @author Filipe, Carlos, Vitor e Matheus
  */
 public class Cliente {
-    public static final String TABLE    = "cliente";
+
+    public static final String TABLE = "cliente";
     public static final String PRIMARYKEY = "id";
-    
+
     private Integer id;
     private String nome;
     private Integer idade;
@@ -63,6 +63,5 @@ public class Cliente {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    
-    
+
 }

@@ -1,14 +1,14 @@
-
 package br.univates.entity;
 
 /**
- * 
+ *
  * @author Filipe, Carlos, Vitor e Matheus
  */
 public class Aviao {
-    public static final String TABLE    = "avioes";
+
+    public static final String TABLE = "avioes";
     public static final String PRIMARYKEY = "id";
-    
+
     private Integer id;
     private double valor_aviao;
     private String nome;
