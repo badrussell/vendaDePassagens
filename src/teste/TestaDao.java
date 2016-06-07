@@ -25,11 +25,13 @@ public class TestaDao {
      */
     public static void main(String[] args) throws ClassNotFoundException {
 
-            Clientes p = new Clientes();
+           /* Clientes p = new Clientes();
             //Voos v = new Voos();
             //Dao.setInsert(p);
             Dao.setUpdate(p);
-                        
+             */
+
+           
 
 
     }

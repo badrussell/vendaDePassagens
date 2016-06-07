@@ -1,5 +1,8 @@
 package br.univates.entity;
 
+import br.univates.dao.Bd;
+import static br.univates.entity.Passagem.PRIMARYKEY;
+import static br.univates.entity.Passagem.TABLE;
 import java.util.Calendar;
 
 /**
@@ -20,6 +23,18 @@ public class Voo {
     private Integer avioes_id;
     private double valor;
 
+    
+    @Bd
+    public static String getTABLE() {
+        return TABLE;
+    }
+
+    @Bd
+    public static String getPRIMARYKEY() {
+        return PRIMARYKEY;
+    }
+
+    @Bd
     public Integer getId() {
         return id;
     }
@@ -28,6 +43,7 @@ public class Voo {
         this.id = id;
     }
 
+    @Bd
     public Calendar getHorario_artida() {
         return horario_artida;
     }
@@ -36,6 +52,7 @@ public class Voo {
         this.horario_artida = horario_artida;
     }
 
+    @Bd
     public Calendar getHorario_chegada() {
         return horario_chegada;
     }
@@ -44,6 +61,7 @@ public class Voo {
         this.horario_chegada = horario_chegada;
     }
 
+    @Bd
     public Calendar getData_voo() {
         return data_voo;
     }
@@ -52,6 +70,7 @@ public class Voo {
         this.data_voo = data_voo;
     }
 
+    @Bd
     public Integer getPartida() {
         return partida;
     }
@@ -60,6 +79,7 @@ public class Voo {
         this.partida = partida;
     }
 
+    @Bd
     public Integer getChegada() {
         return chegada;
     }
@@ -68,6 +88,7 @@ public class Voo {
         this.chegada = chegada;
     }
 
+    @Bd
     public Integer getAvioes_id() {
         return avioes_id;
     }
@@ -76,6 +97,7 @@ public class Voo {
         this.avioes_id = avioes_id;
     }
 
+    @Bd
     public double getValor() {
         return valor;
     }

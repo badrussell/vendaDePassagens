@@ -1,5 +1,7 @@
 package br.univates.entity;
 
+import br.univates.dao.Bd;
+
 /**
  *
  * @author Filipe, Carlos, Vitor e Matheus
@@ -16,6 +18,17 @@ public class Aviao {
     private Integer companhias_aereas_id;
     private Integer numero_assentos;
 
+    @Bd
+    public static String getTABLE() {
+        return TABLE;
+    }
+
+    @Bd
+    public static String getPRIMARYKEY() {
+        return PRIMARYKEY;
+    }
+
+    @Bd
     public Integer getId() {
         return id;
     }
@@ -24,6 +37,7 @@ public class Aviao {
         this.id = id;
     }
 
+    @Bd
     public double getValor_aviao() {
         return valor_aviao;
     }
@@ -32,6 +46,7 @@ public class Aviao {
         this.valor_aviao = valor_aviao;
     }
 
+    @Bd
     public String getNome() {
         return nome;
     }
@@ -40,6 +55,7 @@ public class Aviao {
         this.nome = nome;
     }
 
+    @Bd
     public String getDescricao() {
         return descricao;
     }
@@ -48,6 +64,7 @@ public class Aviao {
         this.descricao = descricao;
     }
 
+    @Bd
     public Integer getCompanhias_aereas_id() {
         return companhias_aereas_id;
     }
@@ -56,6 +73,7 @@ public class Aviao {
         this.companhias_aereas_id = companhias_aereas_id;
     }
 
+    @Bd
     public Integer getNumero_assentos() {
         return numero_assentos;
     }

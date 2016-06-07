@@ -1,5 +1,9 @@
 package br.univates.entity;
 
+import br.univates.dao.Bd;
+import static br.univates.entity.Cliente.PRIMARYKEY;
+import static br.univates.entity.Cliente.TABLE;
+
 /**
  *
  * @author Filipe, Carlos, Vitor e Matheus
@@ -12,6 +16,17 @@ public class CompaniaAerea {
     private Integer id;
     private String nome;
 
+    @Bd
+    public static String getTABLE() {
+        return TABLE;
+    }
+
+    @Bd
+    public static String getPRIMARYKEY() {
+        return PRIMARYKEY;
+    }
+
+    @Bd
     public Integer getId() {
         return id;
     }
@@ -20,6 +35,7 @@ public class CompaniaAerea {
         this.id = id;
     }
 
+    @Bd
     public String getNome() {
         return nome;
     }
