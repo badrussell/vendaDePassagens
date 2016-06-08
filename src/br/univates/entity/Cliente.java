@@ -1,14 +1,18 @@
-
 package br.univates.entity;
 
+import br.univates.dao.Bd;
+import static br.univates.entity.Categoria.PRIMARYKEY;
+import static br.univates.entity.Categoria.TABLE;
+
 /**
- * 
+ *
  * @author Filipe, Carlos, Vitor e Matheus
  */
 public class Cliente {
-    public static final String TABLE    = "cliente";
+
+    public static final String TABLE = "cliente";
     public static final String PRIMARYKEY = "id";
-    
+
     private Integer id;
     private String nome;
     private Integer idade;
@@ -16,6 +20,17 @@ public class Cliente {
     private String usuario;
     private String senha;
 
+    @Bd
+    public static String getTABLE() {
+        return TABLE;
+    }
+
+    @Bd
+    public static String getPRIMARYKEY() {
+        return PRIMARYKEY;
+    }
+
+    @Bd
     public Integer getId() {
         return id;
     }
@@ -24,6 +39,7 @@ public class Cliente {
         this.id = id;
     }
 
+    @Bd
     public String getNome() {
         return nome;
     }
@@ -32,6 +48,7 @@ public class Cliente {
         this.nome = nome;
     }
 
+    @Bd
     public Integer getIdade() {
         return idade;
     }
@@ -40,6 +57,7 @@ public class Cliente {
         this.idade = idade;
     }
 
+    @Bd
     public char getSexo() {
         return sexo;
     }
@@ -48,6 +66,7 @@ public class Cliente {
         this.sexo = sexo;
     }
 
+    @Bd
     public String getUsuario() {
         return usuario;
     }
@@ -56,6 +75,7 @@ public class Cliente {
         this.usuario = usuario;
     }
 
+    @Bd
     public String getSenha() {
         return senha;
     }
@@ -63,6 +83,5 @@ public class Cliente {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    
-    
+
 }

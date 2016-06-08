@@ -50,6 +50,71 @@ public class Dao {
 
         return ret;
     }
+    
+    /**
+     * 
+     * @param obj - Object
+     * @param where - ClauseSQL onde é implementada a cláusula where da Query
+     * @param groupBy
+     * @param orderBy
+     * @return Retorna um array bidimencional com os dados
+     */
+    public static ArrayList<String []> getSelectImplementsClause(Object obj, ClauseSQL where, ClauseSQL groupBy, ClauseSQL orderBy) {
+
+        ArrayList<String[]> ret = new ArrayList<>();
+        ArrayList<String> aColumns = new ArrayList<>();
+        int i = 0, j = 0, lines = 0;
+        String query; 
+        
+        String table = ManipulateClass.getTableClass(obj);
+        String primaryKey = ManipulateClass.getPrimaryKeyClass(obj);
+        String id = ManipulateClass.getValuePrimaryKey(obj);
+
+        aColumns = Util.getNameColumns(table);
+
+        if (where != null && groupBy == null && orderBy == null ) {
+            query = "SELECT * FROM " + table + " WHERE " + where.getClausula();
+        } else if (where != null && groupBy != null && orderBy == null) {
+            query = "SELECT * FROM " + table + " WHERE " + where.getClausula() + " GROUP BY " + groupBy.getClausula();
+        } else if (where != null && groupBy != null && orderBy != null) {
+            query = "SELECT * FROM " + table + " WHERE " + where.getClausula() + " GROUP BY " + groupBy.getClausula() + " ORDER BY " + orderBy.getClausula();
+        } else if (where != null && groupBy == null && orderBy != null){
+            query = "SELECT * FROM " + table + " WHERE " + where.getClausula() + " ORDER BY " + orderBy.getClausula();
+        } else if (where == null && groupBy == null && orderBy != null){
+            query = "SELECT * FROM " + table + " ORDER BY " + orderBy.getClausula();
+        } else {
+            query = "SELECT * FROM " + table;
+        }
+
+        System.out.println(query);
+        
+        lines = Util.getContLinesSelect(table, where, groupBy, orderBy);
+                
+        try (Connection con = ConFactory.getConnection()) {
+            Statement statement = con.createStatement();
+            statement.execute(query);
+            
+            ResultSet rs = statement.getResultSet();
+            String [][] linha = new String [lines][aColumns.size()];
+            
+            while (rs.next()) {
+                for (String string : aColumns) {
+                    linha[j][i] = rs.getString(aColumns.get(i));
+                    i++;
+                }
+                
+                ret.add(linha[j]);
+                j ++;
+                i = 0;
+                
+            }
+            con.close();
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return ret;
+    }
 
     /**
      *

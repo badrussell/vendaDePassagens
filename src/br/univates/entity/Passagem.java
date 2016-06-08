@@ -1,22 +1,36 @@
-
 package br.univates.entity;
 
+import br.univates.dao.Bd;
+import static br.univates.entity.CompaniaAerea.PRIMARYKEY;
+import static br.univates.entity.CompaniaAerea.TABLE;
 import java.util.Calendar;
 
 /**
- * 
+ *
  * @author Filipe, Carlos, Vitor e Matheus
  */
 public class Passagem {
-    public static final String TABLE    = "passagens";
+
+    public static final String TABLE = "passagens";
     public static final String PRIMARYKEY = "id";
-    
+
     private Integer id;
     private double valor;
     private Integer voo_id;
     private Integer categorias_id;
     private Calendar validade;
 
+    @Bd
+    public static String getTABLE() {
+        return TABLE;
+    }
+
+    @Bd
+    public static String getPRIMARYKEY() {
+        return PRIMARYKEY;
+    }
+
+    @Bd
     public Integer getId() {
         return id;
     }
@@ -25,6 +39,7 @@ public class Passagem {
         this.id = id;
     }
 
+    @Bd
     public double getValor() {
         return valor;
     }
@@ -33,6 +48,7 @@ public class Passagem {
         this.valor = valor;
     }
 
+    @Bd
     public Integer getVoo_id() {
         return voo_id;
     }
@@ -41,6 +57,7 @@ public class Passagem {
         this.voo_id = voo_id;
     }
 
+    @Bd
     public Integer getCategorias_id() {
         return categorias_id;
     }
@@ -49,6 +66,7 @@ public class Passagem {
         this.categorias_id = categorias_id;
     }
 
+    @Bd
     public Calendar getValidade() {
         return validade;
     }
@@ -56,5 +74,5 @@ public class Passagem {
     public void setValidade(Calendar validade) {
         this.validade = validade;
     }
-    
+
 }
