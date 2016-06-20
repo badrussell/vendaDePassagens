@@ -1,6 +1,6 @@
 package br.univates.entity;
 
-import br.univates.dao.Bd;
+import br.univates.persistencia.Bd;
 import static br.univates.entity.Passagem.PRIMARYKEY;
 import static br.univates.entity.Passagem.TABLE;
 import java.util.Calendar;

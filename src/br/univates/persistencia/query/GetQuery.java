@@ -3,22 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.univates.dao;
+package br.univates.persistencia.query;
 
 /**
  *
  * @author Matheus
  */
-public class ClauseSQL {
-    
-    private String clause;
+public interface GetQuery {
 
-    public ClauseSQL(String clausula) {
-        this.clause = clausula;
-    }
-
-    public String getClausula() {
-        return clause;
-    }
+    public String getQuery();
     
+    public String getTable();
+    
+    public String [] getColumns();
+    
+    public int getTypeQuery();
 }

@@ -5,7 +5,7 @@
  */
 package teste;
 
-import br.univates.dao.Dao;
+import br.univates.persistencia.Dao;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.SQLException;

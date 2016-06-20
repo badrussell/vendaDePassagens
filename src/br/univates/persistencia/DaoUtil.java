@@ -1,5 +1,6 @@
-package br.univates.dao;
+package br.univates.persistencia;
 
+import br.univates.persistencia.clauses.ClauseSQL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,32 +13,28 @@ import java.util.logging.Logger;
  *
  * @author Matheus
  */
-public class Util {
+public class DaoUtil {
 
-    /**
-     *
-     * @param table - tabela a ser contada
-     * @param where - clausula where a ser usada
-     * @param groupBy
-     * @param orderBy
-     * @return Retorna o número de linhas de uma consulta
-     */
-    public static int getContLinesSelect(String table, ClauseSQL where, ClauseSQL groupBy, ClauseSQL orderBy) {
+
+    public static int getContLinesSelect(String query) {
         int ret = 0;
-        String query;
 
-        if (where != null) {
-            query = "SELECT COUNT(*) FROM " + table + " WHERE " + where.getClausula();
-        } else if (where != null && groupBy != null) {
-            query = "SELECT COUNT(*) FROM " + table + " WHERE " + where.getClausula() + " GROUP BY " + groupBy.getClausula();
-        } else if (where != null && groupBy != null && orderBy != null) {
-            query = "SELECT COUNT(*) FROM " + table + " WHERE " + where.getClausula() + " GROUP BY " + groupBy.getClausula() + " ORDER BY " + orderBy.getClausula();
-        } else if (where != null && orderBy != null){
-            query = "SELECT COUNT(*) FROM " + table + " WHERE " + where.getClausula() + " ORDER BY " + orderBy.getClausula();
+        if (query.contains("*")) {
+            query = query.replace("*", "COUNT(*)");
+            System.out.println(query);
         } else {
-            query = "SELECT COUNT(*) FROM " + table;
+            String[] q = query.split(" ");
+            for (int i = 0; i < q.length; i++) {
+                if (q[i].equals("SELECT")) {
+                    query = q[i] + " COUNT(*) ";
+                } else if (q[i].equals("FROM")) {
+                    for (int j = i; j < q.length; j++) {
+                        query += q[j] + " ";
+                    }
+                }
+            }
         }
-
+        System.out.println(query);
         try (Connection con = ConFactory.getConnection()) {
             Statement statement = con.createStatement();
             statement.execute(query);
@@ -49,18 +46,13 @@ public class Util {
 
             con.close();
         } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DaoUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return ret;
 
     }
 
-    /**
-     *
-     * @param tabela - Tabela do BD
-     * @return Retorna um ArrayList com o Nome das Colunas
-     */
     public static ArrayList<String> getNameColumns(String tabela) {
 
         ArrayList<String> ret = new ArrayList<>();
@@ -83,12 +75,7 @@ public class Util {
         return ret;
 
     }
-
-    /**
-     *
-     * @param tabela - Tabela do BD
-     * @return Retorna um ArrayList com o Tipo de dados das Colunas
-     */
+    
     public static ArrayList<String> getTDataColumns(String tabela) {
 
         ArrayList<String> ret = new ArrayList<>();
@@ -112,11 +99,6 @@ public class Util {
 
     }
 
-    /**
-     *
-     * @param tabela - Tabela do BD
-     * @return Retorna uma matriz com os Nomes das Colunas e Tipo de dados
-     */
     public static ArrayList<String[]> getDataColumns(String tabela) {
 
         ArrayList<String[]> ret = new ArrayList<>();

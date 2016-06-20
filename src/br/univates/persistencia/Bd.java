@@ -1,4 +1,4 @@
-package br.univates.dao;
+package br.univates.persistencia;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

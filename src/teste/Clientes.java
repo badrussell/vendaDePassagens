@@ -1,6 +1,6 @@
 package teste;
 
-import br.univates.dao.Bd;
+import br.univates.persistencia.Bd;
 
 /**
  *
