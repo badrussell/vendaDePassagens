@@ -27,7 +27,7 @@ public class ConFactory {
 
 //        String servidor = "localhost";
 //        String login = "root";
-//        String senha = "casinha1208";
+//        String senha = "root";
 //        String banco = "trabalho";
         
         String url = "jdbc:mysql://" + servidor + "/" + banco;

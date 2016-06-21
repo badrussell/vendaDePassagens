@@ -2,6 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/var/www/vitor/kawaky/src/teste/TestaDao.java</file>
+            <file>file:/var/www/vitor/kawaky/src/br/univates/persistencia/query/Update.java</file>
+            <file>file:/var/www/vitor/kawaky/src/br/univates/views/Principal.java</file>
+            <file>file:/var/www/vitor/kawaky/src/br/univates/entity/Ofertas.java</file>
+            <file>file:/var/www/vitor/kawaky/src/br/univates/models/modeloTabelaOfertas.java</file>
+        </group>
     </open-files>
 </project-private>
