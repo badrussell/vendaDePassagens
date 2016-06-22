@@ -19,16 +19,16 @@ public class ConFactory {
      */
     public static Connection getConnection() throws ClassNotFoundException {
 
-        String servidor = "107.170.5.223:3306";
-        String login = "root";
-        String senha = "smolareck";
-        String banco = "trabalho";
-
-
-//        String servidor = "localhost";
+//        String servidor = "107.170.5.223:3306";
 //        String login = "root";
-//        String senha = "root";
+//        String senha = "smolareck";
 //        String banco = "trabalho";
+
+
+        String servidor = "localhost";
+        String login = "root";
+        String senha = "root";
+        String banco = "trabalho";
         
         String url = "jdbc:mysql://" + servidor + "/" + banco;
         
