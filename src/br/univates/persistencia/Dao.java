@@ -37,6 +37,8 @@ public class Dao {
                 Statement statement = con.createStatement();
                 statement.execute(query.getQuery());
 
+                System.out.println("Query: " + query.getQuery());
+                
                 ResultSet rs = statement.getResultSet();
                 //Verifica o tipo de GetQuery
                 if (query.getTypeQuery() == 0) { 

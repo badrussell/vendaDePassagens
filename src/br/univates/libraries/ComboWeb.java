@@ -65,6 +65,11 @@ public class ComboWeb extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    public String getSelectedItem()
+    {
+        return (String) combo.getSelectedItem();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

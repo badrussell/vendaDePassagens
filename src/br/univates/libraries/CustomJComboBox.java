@@ -47,4 +47,9 @@ public class CustomJComboBox extends JComboBox {
         sbm.setDb(arr);
     }
     
+    public String getSelectedItem()
+    {
+        return (String) sbm.getSelectedItem();
+    }
+    
 }
