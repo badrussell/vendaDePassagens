@@ -35,8 +35,9 @@ public class Passagem {
         return id;
     }
 
-    public void setId(Integer id) {
+    public Passagem setId(Integer id) {
         this.id = id;
+        return this;
     }
 
     @Bd
@@ -44,8 +45,9 @@ public class Passagem {
         return valor;
     }
 
-    public void setValor(double valor) {
+    public Passagem setValor(double valor) {
         this.valor = valor;
+        return this;
     }
 
     @Bd
@@ -53,8 +55,9 @@ public class Passagem {
         return voo_id;
     }
 
-    public void setVoo_id(Integer voo_id) {
+    public Passagem setVoo_id(Integer voo_id) {
         this.voo_id = voo_id;
+        return this;
     }
 
     @Bd
@@ -62,8 +65,9 @@ public class Passagem {
         return categorias_id;
     }
 
-    public void setCategorias_id(Integer categorias_id) {
+    public Passagem setCategorias_id(Integer categorias_id) {
         this.categorias_id = categorias_id;
+        return this;
     }
 
     @Bd
@@ -71,8 +75,9 @@ public class Passagem {
         return validade;
     }
 
-    public void setValidade(Calendar validade) {
+    public Passagem setValidade(Calendar validade) {
         this.validade = validade;
+        return this;
     }
 
 }
