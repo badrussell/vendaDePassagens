@@ -12,30 +12,31 @@ import java.util.logging.Logger;
  */
 public class ConFactory {
 
+//      private static final String servidor = "107.170.5.223:3306";
+//      private static final String login = "root";
+//      private static final String senha = "smolareck";
+//      private static final  String banco = "trabalho";
+
+
+        private static final String servidor = "localhost";
+        private static final String login = "root";
+        private static final String senha = "casinha1208";
+        private static final String banco = "vendadepassagens";
+    
     /**
      * 
      * @return Retorna uma conexão com o BD
      * @throws ClassNotFoundException 
      */
     public static Connection getConnection() throws ClassNotFoundException {
-
-//        String servidor = "107.170.5.223:3306";
-//        String login = "root";
-//        String senha = "smolareck";
-//        String banco = "trabalho";
-
-
-        String servidor = "localhost";
-        String login = "root";
-        String senha = "root";
-        String banco = "trabalho";
-        
+     
         String url = "jdbc:mysql://" + servidor + "/" + banco;
         
         Connection connection;
         
         try {
             connection = DriverManager.getConnection(url, login, senha);
+            System.out.println(url);
         } catch (SQLException ex) {
             Logger.getLogger(ConFactory.class.getName()).log(Level.SEVERE, null, ex);
             throw new RuntimeException("Erro ao conectar com o BD!!!", ex);
@@ -44,4 +45,10 @@ public class ConFactory {
         return connection;
 
     }
+
+    public static String getBanco() {
+        return banco;
+    }
+    
+    
 }

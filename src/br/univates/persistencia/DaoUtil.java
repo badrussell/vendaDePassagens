@@ -56,7 +56,7 @@ public class DaoUtil {
     public static ArrayList<String> getNameColumns(String tabela) {
 
         ArrayList<String> ret = new ArrayList<>();
-        String query = "SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_NAME = '" + tabela + "'";
+        String query = "SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" + ConFactory.getBanco() + "' AND TABLE_NAME = '" + tabela + "'";
         try (Connection con = ConFactory.getConnection()) {
             Statement statement = con.createStatement();
             statement.execute(query);
@@ -79,7 +79,7 @@ public class DaoUtil {
     public static ArrayList<String> getTDataColumns(String tabela) {
 
         ArrayList<String> ret = new ArrayList<>();
-        String query = "SELECT DATA_TYPE FROM information_schema.COLUMNS WHERE TABLE_NAME = '" + tabela + "'";
+        String query = "SELECT DATA_TYPE FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" + ConFactory.getBanco() + "' AND TABLE_NAME = '" + tabela + "'";
         try (Connection con = ConFactory.getConnection()) {
             Statement statement = con.createStatement();
             statement.execute(query);
@@ -103,8 +103,8 @@ public class DaoUtil {
 
         ArrayList<String[]> ret = new ArrayList<>();
 
-        String query = "SELECT COLUMN_NAME, DATA_TYPE, EXTRA FROM information_schema.COLUMNS WHERE TABLE_NAME = '" + tabela + "'";
-
+        String query = "SELECT COLUMN_NAME, DATA_TYPE, EXTRA FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" + ConFactory.getBanco() + "' AND TABLE_NAME = '" + tabela + "'";
+        System.out.println(query);
         try (Connection con = ConFactory.getConnection()) {
             Statement statement = con.createStatement();
             statement.execute(query);
@@ -129,7 +129,7 @@ public class DaoUtil {
     public static ArrayList<String[]> getAutoIncrement(String tabela) {
 
         ArrayList<String[]> ret = new ArrayList<>();
-        String query = "SELECT COLUMN_NAME, EXTRA FROM information_schema.COLUMNS WHERE TABLE_NAME = '" + tabela + "'";
+        String query = "SELECT COLUMN_NAME, EXTRA FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" + ConFactory.getBanco() + "' AND TABLE_NAME = '" + tabela + "'";
         try (Connection con = ConFactory.getConnection()) {
             Statement statement = con.createStatement();
             statement.execute(query);
