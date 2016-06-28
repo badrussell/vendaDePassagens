@@ -13,6 +13,7 @@ public class Session {
     
     private static Integer idCliente = null;
     private static Integer idPassagem = null;
+    private static Integer idVoo = null;
 
     public static Integer getIdCliente() {
         return idCliente;
@@ -29,6 +30,12 @@ public class Session {
     public static void setIdPassagem(Integer idPassagem) {
         Session.idPassagem = idPassagem;
     }
+   
+    public static void setIdVoo(Integer idVoo){
+        Session.idVoo = idVoo;
+    }
     
-    
+    public static Integer getIdVoo(){
+        return Session.idVoo;
+    }
 }

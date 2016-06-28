@@ -6,6 +6,7 @@
 package br.univates.views;
 
 import br.univates.entity.Ofertas;
+import br.univates.entity.Session;
 import br.univates.libraries.ComboWeb;
 import br.univates.libraries.Util;
 import br.univates.models.modeloTabelaOfertas;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import teste.Voos;
 
 /**
@@ -41,12 +43,12 @@ public class Principal extends javax.swing.JFrame {
          */
         ArrayList<String []> ofertas = Dao.get(new Select(
                 "voos AS v", 
-                new String[] {"nome", "valor_voo", "data_voo"}, 
+                new String[] {"v.id","nome", "valor_voo", "data_voo"}, 
                 new InnerJoin("avioes AS a", "v.avioes_id = a.id"), 
                 new Where("promocao = 1"),
                 new Limit("100")));
         
-        Util.atualizaTabela(tabelaOfertas, new String[]{"Nome","Valor","Data"}, ofertas);
+        Util.atualizaTabela(tabelaOfertas, new String[]{"id","Nome","Valor","Data"}, ofertas);
         
         comboWeb1.setAeroportos(Dao.get(new Select("aeroportos", new String[]{"nome"})));
         comboWeb2.setAeroportos(Dao.get(new Select("aeroportos", new String[]{"nome"})));
@@ -89,15 +91,20 @@ public class Principal extends javax.swing.JFrame {
 
         tabelaOfertas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Nome", "Valor", "Data"
+                "Id", "Nome", "Valor", "Data"
             }
         ));
+        tabelaOfertas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaOfertasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabelaOfertas);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -256,35 +263,74 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        String dataOrigemF = new SimpleDateFormat("yyyy-MM-dd").format(dataOrigem.getDate());
-
-        String origem = comboWeb1.getSelectedItem();
-        String destino = comboWeb2.getSelectedItem();
         
-        String sql = "SELECT V.id,V.horario_partida,V.horario_chegada,A.sigla,AA.sigla, V.valor_voo\n" +
-                    "FROM voos V \n" +
-                    "	INNER JOIN aeroportos A ON V.partida = A.id\n" +
-                    "    INNER JOIN aeroportos AA ON V.chegada = AA.id\n" +
-                    "WHERE data_voo = '2016-06-03'\n" +
-                    "	AND (A.nome LIKE '%Santa Maria Airport%'OR AA.nome LIKE '%Santa Maria Airport%')";
+        if (comboWeb1.getSelectedItem() == null
+            || comboWeb2.getSelectedItem() == null
+            || dataOrigem.getDate() == null) 
+        {
+            JOptionPane.showMessageDialog(null, "Informe todos os dados para fazer a pesquisa");
+        }else{
+            
+            System.out.println("Entrou aqui");
+            
+            String dataOrigemF = new SimpleDateFormat("yyyy-MM-dd").format(dataOrigem.getDate());
 
+            String origem = comboWeb1.getSelectedItem();
+            String destino = comboWeb2.getSelectedItem();
+
+            String sql = "SELECT V.id,V.horario_partida,V.horario_chegada,A.sigla,AA.sigla, V.valor_voo\n" +
+                        "FROM voos V \n" +
+                        "	INNER JOIN aeroportos A ON V.partida = A.id\n" +
+                        "    INNER JOIN aeroportos AA ON V.chegada = AA.id\n" +
+                        "WHERE data_voo = '2016-06-03'\n" +
+                        "	AND (A.nome LIKE '%Santa Maria Airport%'OR AA.nome LIKE '%Santa Maria Airport%')";
+
+             ArrayList<String []> voos = Dao.get(new Select(
+                "voos as V", 
+                new String[] {"V.id","V.horario_partida","V.horario_chegada","A.sigla","AA.sigla","V.valor_voo"}, 
+                new InnerJoin("aeroportos as A", "V.partida = A.id "), 
+                     new InnerJoin("aeroportos as AA", "V.chegada = AA.id"),
+                new Where("data_voo = '" + dataOrigemF + "'"
+                        + "AND (A.nome LIKE '%" + origem + "%'"
+                        + "OR AA.nome LIKE '%" + destino + "%')"
+                ),
+                new Limit("100")));
+
+             Util.atualizaTabela(consulta, new String[]{"Id","Data partida","Data Chegada","Origem","Destino","Valor do Vôo"},voos);
+        }
+    }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //Grava no arquivo de sessao o id do voos selecionado
+        int linha = consulta.getSelectedRow();
+        
+        if (linha >= 0) {
+            Object idVoo = consulta.getValueAt(linha, 0);
+            Session.setIdVoo(Integer.parseInt((String) idVoo));
+
+            System.out.println("id voo da session: " + Session.getIdVoo());
+        }else{
+            JOptionPane.showMessageDialog(null,"Por favor selecione uma linha!");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tabelaOfertasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaOfertasMouseClicked
+        // TODO add your handling code here:
+        Object id = tabelaOfertas.getValueAt(tabelaOfertas.getSelectedRow(), 0);
+        
+        int idVoo = Integer.parseInt((String) id);
+        
          ArrayList<String []> voos = Dao.get(new Select(
             "voos as V", 
             new String[] {"V.id","V.horario_partida","V.horario_chegada","A.sigla","AA.sigla","V.valor_voo"}, 
             new InnerJoin("aeroportos as A", "V.partida = A.id "), 
                  new InnerJoin("aeroportos as AA", "V.chegada = AA.id"),
-            new Where("data_voo = '" + dataOrigemF + "'"
-                    + "AND (A.nome LIKE '%" + origem + "%'"
-                    + "OR AA.nome LIKE '%" + destino + "%')"
+            new Where("V.id = '"+idVoo+"'"
             ),
             new Limit("100")));
-         
+        
          Util.atualizaTabela(consulta, new String[]{"Id","Data partida","Data Chegada","Origem","Destino","Valor do Vôo"},voos);
-    }//GEN-LAST:event_btnPesquisarActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_tabelaOfertasMouseClicked
     /**
      * @param args the command line arguments
      */
