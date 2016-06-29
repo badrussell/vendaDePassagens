@@ -3,6 +3,7 @@ package br.univates.entity;
 import br.univates.persistencia.Bd;
 import static br.univates.entity.Passagem.PRIMARYKEY;
 import static br.univates.entity.Passagem.TABLE;
+import java.util.Calendar;
 
 /**
  *
@@ -13,13 +14,13 @@ public class Voo {
     public static final String TABLE = "voo";
     public static final String PRIMARYKEY = "id";
 
-    private int id;
-    private String horario_partida;
-    private String horario_chegada;
-    private String data_voo;
-    private int partida;
-    private int chegada;
-    private int avioes_id;
+    private Integer id;
+    private Calendar horario_artida;
+    private Calendar horario_chegada;
+    private Calendar data_voo;
+    private Integer partida;
+    private Integer chegada;
+    private Integer avioes_id;
     private double valor;
 
     
@@ -34,65 +35,65 @@ public class Voo {
     }
 
     @Bd
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
     @Bd
-    public String getHorario_partida() {
-        return horario_partida;
+    public Calendar getHorario_artida() {
+        return horario_artida;
     }
 
-    public void setHorario_partida(String horario_partida) {
-        this.horario_partida = horario_partida;
+    public void setHorario_artida(Calendar horario_artida) {
+        this.horario_artida = horario_artida;
     }
 
     @Bd
-    public String getHorario_chegada() {
+    public Calendar getHorario_chegada() {
         return horario_chegada;
     }
 
-    public void setHorario_chegada(String horario_chegada) {
+    public void setHorario_chegada(Calendar horario_chegada) {
         this.horario_chegada = horario_chegada;
     }
 
     @Bd
-    public String getData_voo() {
+    public Calendar getData_voo() {
         return data_voo;
     }
 
-    public void setData_voo(String data_voo) {
+    public void setData_voo(Calendar data_voo) {
         this.data_voo = data_voo;
     }
 
     @Bd
-    public int getPartida() {
+    public Integer getPartida() {
         return partida;
     }
 
-    public void setPartida(int partida) {
+    public void setPartida(Integer partida) {
         this.partida = partida;
     }
 
     @Bd
-    public int getChegada() {
+    public Integer getChegada() {
         return chegada;
     }
 
-    public void setChegada(int chegada) {
+    public void setChegada(Integer chegada) {
         this.chegada = chegada;
     }
 
     @Bd
-    public int getAvioes_id() {
+    public Integer getAvioes_id() {
         return avioes_id;
     }
 
-    public void setAvioes_id(int avioes_id) {
+    public void setAvioes_id(Integer avioes_id) {
         this.avioes_id = avioes_id;
     }
 

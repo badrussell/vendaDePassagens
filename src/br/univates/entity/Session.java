@@ -5,27 +5,24 @@
  */
 package br.univates.entity;
 
-import br.univates.entity.Cliente;
-
 /**
  *
  * @author Matheus
  */
 public class Session {
     
-    private static Cliente Cliente = null;
+    private static Integer idCliente = null;
     private static Integer idPassagem = null;
-    private static Aviao aviao = null;
-    private static Voo voo = null;
+    private static Integer idVoo = null;
 
-    public static Cliente getCliente() {
-        return Cliente;
+    public static Integer getIdCliente() {
+        return idCliente;
     }
 
-    public static void setCliente(Cliente Cliente) {
-        Session.Cliente = Cliente;
+    public static void setIdCliente(Integer idCliente) {
+        Session.idCliente = idCliente;
     }
-    
+
     public static Integer getIdPassagem() {
         return idPassagem;
     }
@@ -34,19 +31,11 @@ public class Session {
         Session.idPassagem = idPassagem;
     }
    
-    public static Aviao getAviao() {
-        return aviao;
+    public static void setIdVoo(Integer idVoo){
+        Session.idVoo = idVoo;
     }
-
-    public static void setAviao(Aviao aviao) {
-        Session.aviao = aviao;
-    }
-
-    public static Voo getVoo() {
-        return voo;
-    }
-
-    public static void setVoo(Voo voo) {
-        Session.voo = voo;
+    
+    public static Integer getIdVoo(){
+        return Session.idVoo;
     }
 }

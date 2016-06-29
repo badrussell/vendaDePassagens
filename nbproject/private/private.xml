@@ -2,11 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/var/www/vitor/kawaky/src/br/univates/persistencia/ConFactory.java</file>
-            <file>file:/var/www/vitor/kawaky/src/br/univates/persistencia/Dao.java</file>
-            <file>file:/var/www/vitor/kawaky/src/br/univates/views/Principal.java</file>
-            <file>file:/var/www/vitor/kawaky/src/br/univates/libraries/CustomJComboBox.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

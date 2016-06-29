@@ -5,18 +5,26 @@
  */
 package br.univates.views;
 
-import br.univates.entity.Aviao;
+import br.univates.entity.Ofertas;
 import br.univates.entity.Session;
-import br.univates.entity.Voo;
+import br.univates.libraries.ComboWeb;
 import br.univates.libraries.Util;
+import br.univates.models.modeloTabelaOfertas;
 import br.univates.persistencia.Dao;
+import br.univates.persistencia.clauses.ClauseSQL;
 import br.univates.persistencia.clauses.InnerJoin;
 import br.univates.persistencia.clauses.Limit;
 import br.univates.persistencia.clauses.Where;
 import br.univates.persistencia.query.Select;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import teste.Voos;
 
 /**
  *
@@ -24,8 +32,8 @@ import javax.swing.JOptionPane;
  */
 public class Principal extends javax.swing.JFrame {
 
-    /** 
-     * Creates new form Principal
+    /**
+     * Creates new form Principala
      */
     public Principal() {
         initComponents();
@@ -35,7 +43,7 @@ public class Principal extends javax.swing.JFrame {
          */
         ArrayList<String []> ofertas = Dao.get(new Select(
                 "voos AS v", 
-                new String[] {"v.id","nome", "REPLACE(valor_voo,'.',',')", "DATE_FORMAT(data_voo,'%d/%m/%Y')"}, 
+                new String[] {"v.id","nome", "valor_voo", "data_voo"}, 
                 new InnerJoin("avioes AS a", "v.avioes_id = a.id"), 
                 new Where("promocao = 1"),
                 new Limit("100")));
@@ -72,7 +80,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         consulta = new javax.swing.JTable();
-        btnComprar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -216,10 +224,10 @@ public class Principal extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(consulta);
 
-        btnComprar.setText("Comprar");
-        btnComprar.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Comprar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnComprarActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -235,7 +243,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(16, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnComprar)
+                .addComponent(jButton1)
                 .addGap(363, 363, 363))
         );
         layout.setVerticalGroup(
@@ -246,7 +254,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
-                .addComponent(btnComprar)
+                .addComponent(jButton1)
                 .addGap(37, 37, 37))
         );
 
@@ -279,7 +287,7 @@ public class Principal extends javax.swing.JFrame {
 
              ArrayList<String []> voos = Dao.get(new Select(
                 "voos as V", 
-                new String[] {"V.id","DATE_FORMAT(V.horario_partida,'%d/%m/%Y')","DATE_FORMAT(V.horario_chegada,'%d/%m/%Y')","A.sigla","AA.sigla","REPLACE(V.valor_voo,'.',',')"}, 
+                new String[] {"V.id","V.horario_partida","V.horario_chegada","A.sigla","AA.sigla","V.valor_voo"}, 
                 new InnerJoin("aeroportos as A", "V.partida = A.id "), 
                      new InnerJoin("aeroportos as AA", "V.chegada = AA.id"),
                 new Where("data_voo = '" + dataOrigemF + "'"
@@ -292,18 +300,19 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
-    private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //Grava no arquivo de sessao o id do voos selecionado
         int linha = consulta.getSelectedRow();
         
         if (linha >= 0) {
             Object idVoo = consulta.getValueAt(linha, 0);
-            Principal.gravaSession(Integer.parseInt((String) idVoo));
-            
+            Session.setIdVoo(Integer.parseInt((String) idVoo));
+
+            System.out.println("id voo da session: " + Session.getIdVoo());
         }else{
             JOptionPane.showMessageDialog(null,"Por favor selecione uma linha!");
         }
-    }//GEN-LAST:event_btnComprarActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tabelaOfertasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaOfertasMouseClicked
         // TODO add your handling code here:
@@ -313,7 +322,7 @@ public class Principal extends javax.swing.JFrame {
         
          ArrayList<String []> voos = Dao.get(new Select(
             "voos as V", 
-            new String[] {"V.id","DATE_FORMAT(V.horario_partida,'%d/%m/%Y')","DATE_FORMAT(V.horario_chegada,'%d/%m/%Y')","A.sigla","AA.sigla","REPLACE(V.valor_voo,'.',',')"}, 
+            new String[] {"V.id","V.horario_partida","V.horario_chegada","A.sigla","AA.sigla","V.valor_voo"}, 
             new InnerJoin("aeroportos as A", "V.partida = A.id "), 
                  new InnerJoin("aeroportos as AA", "V.chegada = AA.id"),
             new Where("V.id = '"+idVoo+"'"
@@ -358,63 +367,13 @@ public class Principal extends javax.swing.JFrame {
         });
     }
 
-    /**
-     * Grava na sessão a informação do voo e do avião
-     * 
-     * @param idVoo 
-     */
-    public static void gravaSession(int idVoo)
-    {
-        ArrayList<String[]> dadosVoo = Dao.get(
-                        new Select("voos as V", 
-                        new String[]{"V.horario_partida","V.horario_chegada","V.avioes_id","V.partida","V.chegada","V.data_voo","V.valor_voo"},
-                        new Where("V.id = "+idVoo),
-                        new Limit("1")));
-         
-        //Cria um objeto voo e atribui a ele os dados
-        Voo voo = new Voo();
-        voo.setId(idVoo);
-        voo.setAvioes_id(Integer.parseInt((String)dadosVoo.get(0)[2]));
-        voo.setChegada(Integer.parseInt((String)dadosVoo.get(0)[4]));
-        voo.setData_voo(dadosVoo.get(0)[5]);
-        voo.setHorario_partida(dadosVoo.get(0)[0]);
-        voo.setHorario_chegada(dadosVoo.get(0)[1]);
-        voo.setPartida(Integer.parseInt((String)dadosVoo.get(0)[3]));
-        voo.setValor(Double.parseDouble((String)dadosVoo.get(0)[6]));
-        
-        //Grava na sessoa um objeto voo
-        Session.setVoo(voo);
-        
-        int idAviao = Integer.parseInt((String)dadosVoo.get(0)[2]);
-        
-        //Faz uma pesquisa ao banco buscando os dados do aviao
-        ArrayList<String[]> dadosAviao = Dao.get(
-                        new Select("avioes as A", 
-                        new String[]{"A.nome","A.descricao","A.companhias_areas_id","A.numero_assentos","A.valor_aviao"},
-                        new Where("A.id = "+idAviao),
-                        new Limit("1")));
-        
-        
-        //Cria o objeto aviao
-        Aviao aviao = new Aviao();
-        aviao.setId(idAviao);
-        aviao.setCompanhias_aereas_id(Integer.parseInt((String)dadosAviao.get(0)[2]));
-        aviao.setDescricao(dadosAviao.get(0)[1]);
-        aviao.setNome(dadosAviao.get(0)[0]);
-        aviao.setNumero_assentos(Integer.parseInt((String)dadosAviao.get(0)[3]));
-        aviao.setValor_aviao(Integer.parseInt((String)dadosAviao.get(0)[4]));
-        
-        //Insere o aviao na session
-        Session.setAviao(aviao);
-    }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnComprar;
     private javax.swing.JButton btnPesquisar;
     private br.univates.libraries.ComboWeb comboWeb1;
     private br.univates.libraries.ComboWeb comboWeb2;
     private javax.swing.JTable consulta;
     private com.toedter.calendar.JDateChooser dataOrigem;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

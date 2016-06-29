@@ -12,16 +12,16 @@ import java.util.logging.Logger;
  */
 public class ConFactory {
 
-//      private static final String servidor = "107.170.5.223:3306";
-//      private static final String login = "root";
-//      private static final String senha = "smolareck";
-//      private static final  String banco = "trabalho";
+      private static final String servidor = "107.170.5.223:3306";
+      private static final String login = "root";
+      private static final String senha = "smolareck";
+      private static final  String banco = "trabalho";
 
 
-        private static final String servidor = "localhost";
-        private static final String login = "root";
-        private static final String senha = "casinha1208";
-        private static final String banco = "vendadepassagens";
+//        private static final String servidor = "localhost";
+//        private static final String login = "root";
+//        private static final String senha = "root";
+//        private static final String banco = "trabalho";
     
     /**
      * 
