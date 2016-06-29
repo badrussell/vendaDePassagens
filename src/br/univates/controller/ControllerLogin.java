@@ -13,6 +13,7 @@ import br.univates.persistencia.query.Insert;
 import br.univates.persistencia.query.Select;
 import br.univates.views.Login;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,37 +26,49 @@ public class ControllerLogin {
      * @return um int com o valor da operação 1,2,3 ou 4
      */
     public int salvar(Login login) {
+       
+        if(this.validaCampos(login)){
         
-        Cliente cliente = new Cliente();
-        cliente.setIdade(Integer.parseInt(login.getTxtIdade().getText()));
-        cliente.setNome(login.getTxtNome().getText());
-        
-        String usuario = login.getTxtUsuario().getText();
-        
-        if (validarUsuario(usuario)) {
-            cliente.setUsuario(usuario);
-        } else {
-            return 3;
+            Cliente cliente = new Cliente();
+
+            try{
+                cliente.setIdade(Integer.parseInt(login.getTxtIdade().getText()));
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Houve um erro com a seguinte mensagem: " + e.getMessage());
+            }
+            
+            System.out.println("Login idade: " + login.getTxtIdade().getText());
+            cliente.setNome(login.getTxtNome().getText());
+
+            String usuario = login.getTxtUsuario().getText();
+
+            if (validarUsuario(usuario)) {
+                cliente.setUsuario(usuario);
+            } else {
+                return 3;
+            }
+
+            String senha = new String(login.getTxtSenha().getPassword());
+            String confirmaSenha = new String(login.getTxtConfirma().getPassword());
+
+            if (this.validarSenha(senha, confirmaSenha)) {
+                cliente.setSenha(senha);
+            } else {
+                return 4;
+            }
+
+            char sexo = this.validarCombo(login.getSelecSexo().getSelectedItem().toString());
+            cliente.setSexo(sexo);
+
+            if (!Dao.set(new Insert(cliente))) {
+                return 1;
+            } else {
+                return 2;
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Insira todos os campos do formulário");
+            return 0;
         }
-        
-        String senha = new String(login.getTxtSenha().getPassword());
-        String confirmaSenha = new String(login.getTxtConfirma().getPassword());
-        
-        if (this.validarSenha(senha, confirmaSenha)) {
-            cliente.setSenha(senha);
-        } else {
-            return 4;
-        }
-        
-        char sexo = this.validarCombo(login.getSelecSexo().getSelectedItem().toString());
-        cliente.setSexo(sexo);
-        
-        if (!Dao.set(new Insert(cliente))) {
-            return 1;
-        } else {
-            return 2;
-        }
-        
     }
 
     /**
@@ -158,4 +171,36 @@ public class ControllerLogin {
         
         return usuarios;
     }   
+    
+    /**
+     * Valida os campos vindos do formulário
+     * 
+     * @param login Objeto do tipo Login 
+     * @return  true em caso de estar todos campos contidos e false caso contrário
+     */
+    public static boolean validaCampos(Login login){
+    
+        if (login.getTxtConfirma().getPassword().equals("")) {
+            return false;
+        }
+        
+        if (login.getTxtIdade().getText().equals("")) {
+            return false;
+        }
+        
+        if (login.getTxtNome().getText().equals("")) {
+            return false;
+        }
+        
+        if (login.getTxtSenha().getPassword().equals("")) {
+            return false;
+        }
+        
+        if (login.getTxtUsuario().getText().equals("")) {
+            return false;
+        }
+
+        return true;
+    }
+    
 }

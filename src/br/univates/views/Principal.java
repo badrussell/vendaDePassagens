@@ -6,27 +6,17 @@
 package br.univates.views;
 
 import br.univates.entity.Aviao;
-import br.univates.entity.Ofertas;
 import br.univates.entity.Session;
 import br.univates.entity.Voo;
-import br.univates.libraries.ComboWeb;
 import br.univates.libraries.Util;
-import br.univates.models.modeloTabelaOfertas;
 import br.univates.persistencia.Dao;
-import br.univates.persistencia.clauses.ClauseSQL;
 import br.univates.persistencia.clauses.InnerJoin;
 import br.univates.persistencia.clauses.Limit;
 import br.univates.persistencia.clauses.Where;
 import br.univates.persistencia.query.Select;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import teste.Voos;
 
 /**
  *
