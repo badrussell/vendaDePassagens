@@ -8,7 +8,9 @@ public class Comparador implements Comparator<Passagem>{
 
     @Override
     public int compare(Passagem o1, Passagem o2) {
-        return o1.getId().compareTo(o2.getId());
+                
+        return (o1.getPoltronas()+ "").compareTo(o2.getPoltronas() + "");
+    
     }
     
 }

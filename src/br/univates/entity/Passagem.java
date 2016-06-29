@@ -9,16 +9,18 @@ import java.util.Calendar;
  *
  * @author Filipe, Carlos, Vitor e Matheus
  */
-public class Passagem {
+public class Passagem{
 
     public static final String TABLE = "passagens";
     public static final String PRIMARYKEY = "id";
 
-    private Integer id;
+    private int id;
+    private int voo_id;
+    private String validade;
+    private int categorias_id;
     private double valor;
-    private Integer voo_id;
-    private Integer categorias_id;
-    private Calendar validade;
+    private int poltronas;
+    private int cliente_id; 
 
     @Bd
     public static String getTABLE() {
@@ -31,13 +33,23 @@ public class Passagem {
     }
 
     @Bd
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public Passagem setId(Integer id) {
-        this.id = id;
-        return this;
+    @Bd
+    public int getVoo_id() {
+        return voo_id;
+    }
+
+    @Bd
+    public String getValidade() {
+        return validade;
+    }
+
+    @Bd
+    public int getCategorias_id() {
+        return categorias_id;
     }
 
     @Bd
@@ -45,39 +57,42 @@ public class Passagem {
         return valor;
     }
 
-    public Passagem setValor(double valor) {
-        this.valor = valor;
-        return this;
+    @Bd
+    public int getPoltronas() {
+        return poltronas;
     }
 
     @Bd
-    public Integer getVoo_id() {
-        return voo_id;
+    public int getCliente_id() {
+        return cliente_id;
     }
 
-    public Passagem setVoo_id(Integer voo_id) {
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setVoo_id(int voo_id) {
         this.voo_id = voo_id;
-        return this;
     }
 
-    @Bd
-    public Integer getCategorias_id() {
-        return categorias_id;
-    }
-
-    public Passagem setCategorias_id(Integer categorias_id) {
-        this.categorias_id = categorias_id;
-        return this;
-    }
-
-    @Bd
-    public Calendar getValidade() {
-        return validade;
-    }
-
-    public Passagem setValidade(Calendar validade) {
+    public void setValidade(String validade) {
         this.validade = validade;
-        return this;
+    }
+
+    public void setCategorias_id(int categorias_id) {
+        this.categorias_id = categorias_id;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
+    public void setPoltronas(int poltronas) {
+        this.poltronas = poltronas;
+    }
+
+    public void setCliente_id(int cliente_id) {
+        this.cliente_id = cliente_id;
     }
 
 }

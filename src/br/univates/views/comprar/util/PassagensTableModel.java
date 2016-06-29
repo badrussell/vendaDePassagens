@@ -12,7 +12,7 @@ import javax.swing.table.AbstractTableModel;
 
 public class PassagensTableModel extends AbstractTableModel{
     
-    String [] colunas = {"ID","VALOR","VALIDADE"};
+    String [] colunas = {"Poltrona","Classe","Valor"};
     List<Passagem> passagens = new ArrayList<>();
     
     @Override
@@ -57,11 +57,20 @@ public class PassagensTableModel extends AbstractTableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch(columnIndex){
             case 0:
-                return passagens.get(rowIndex).getId()+"";
+                return passagens.get(rowIndex).getPoltronas();
             case 1:
-                return passagens.get(rowIndex).getValor()+"";
+                switch (passagens.get(rowIndex).getCategorias_id()){
+                    case 1: 
+                        return "A";
+                    case 2:
+                        return "B";
+                    case 3:
+                        return "C";
+                    default:
+                        return "E";
+                }
             case 2:
-                return passagens.get(rowIndex).getValidade().getTime();
+                return "R$: " + (passagens.get(rowIndex).getValor()+"").replace(".", ",");
             default:
                 throw new IndexOutOfBoundsException();
         }
