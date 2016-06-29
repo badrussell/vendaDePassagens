@@ -10,12 +10,12 @@ import static br.univates.entity.Categoria.TABLE;
  */
 public class Cliente {
 
-    public static final String TABLE = "cliente";
+    public static final String TABLE = "clientes";
     public static final String PRIMARYKEY = "id";
 
-    private Integer id;
+    private int id;
     private String nome;
-    private Integer idade;
+    private int idade;
     private char sexo;
     private String usuario;
     private String senha;
@@ -31,11 +31,11 @@ public class Cliente {
     }
 
     @Bd
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -49,11 +49,11 @@ public class Cliente {
     }
 
     @Bd
-    public Integer getIdade() {
+    public int getIdade() {
         return idade;
     }
 
-    public void setIdade(Integer idade) {
+    public void setIdade(int idade) {
         this.idade = idade;
     }
 
